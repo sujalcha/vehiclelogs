@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Page</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/><!-- linking CSS file-->
+		<link rel="stylesheet" href="css/VehicleLogs.css"><!-- linking CSS file-->
+
+		<script src="js/jquery-1.11.1.min.js"></script> <!-- linking JS file-->
+		<script src="js/jquery.mobile-1.4.5.min.js"></script><!-- linking JS file-->
+		<script src="js/VehicleLogs.js"></script><!-- linking JS file-->
+
+
+  </head>
+<body>
+  <div data-role="page" id="home_page">
+    <div data-role="header">
+      <h1>Vehicle Logs</h1><!-- Header of the main page-->
+    </div>
+
+  <div data-role="content"> <!--creating a division for the main content for the main page -->
+    <ul data-role="listview" ><!-- Listing the types of vehicles for the main page-->
+      <li><a href="#vehicle"  id="Car" onclick="getID(1)">Car</a></li>
+      <li><a href="#vehicle"  id="Truck" onclick="getID(2)"> 5T Truck</a></li>
+      <li><a href="#vehicle"  id="10T Truck" onclick="getID(3)">10T Truck</a></li>
+      <li><a href="#vehicle"  id="Tipper" onclick="getID(4)">Tipper</a></li>
+      <li><a href="#vehicle"  id="Articulated" onclick="getID(5)">Articulated</a></li>
+   </ul>
+
+    <br><!-- giving a line break to seperate the footer from the main page contents-->
+  </div><!-- cloding the content -->
+
+  <div data-role="footer" data-position="fixed" style="text-align: center"><!--creating a division for the footer in the main page -->
+    <p> <B>CQUniversity, R.Balsys.2017</B></p> <!-- contents of the main page footer-->
+   </div><!-- /footer -->
+
+</div><!-- /home_page -->
+
+<div data-role="page" id="vehicle"> <!-- if the user selects the type of vehicle they want to know about, the request is sent to this division-->
+  <div data-role="header">
+    <a type="reset" data-role="button" onclick="clearing()" >Clear</a> <!--Clear button on the type of Vehicle form-->
+    <h1> <span id="CarName"> </span></h1> <!-- This span id displays what vehicle has been selected by the user -->
+    <a id="6" href="#Show-form" data-role="button" onclick="showLogs()">Show Logs</a> <!-- the Slow Logs button shows all the logs of Particular vehicle -->
+  </div><!-- /header -->
+
+  <div data-role="content">
+    <form id="vehicle-form" method="post" data-ajax="false"> <!-- Creating a form to enter the Vehicle and Rego no -->
+      <label for="vehicle_id">Driver:</label>
+      <input type="text"  name="vehicle_id" id="vehicle_id"  placeholder="Your name" >
+      <label for="rego">Rego#:</label>
+      <input type="number"  name="rego" placeholder="000-XXX" id="rego" >
+      <ul>
+        <li>
+          <a  class="click-me" data-role="button" onclick="showInfo()" id="text1" type="button">Start Time</a>
+          <output type='text' id='start' value='' name="output1" /></output>
+        </li>
+
+        <li>
+          <a  class="click-me" data-role="button" onclick="showInfo()" id="text2" type="button">First Break</a>
+          <output type='text' id='first' value='' name="output2" /></output >
+        </li>
+        <li>
+          <a  class="click-me" data-role="button" onclick="showInfo()" id="text3" type="button">Second Break</a>
+          <output type='text' id='second' value='' name="output3" /></output>
+        </li>
+        <li>
+          <a class="click-me" data-role="button" onclick="showInfo()" id="text4" type="button">End Time</a>
+          <output type='text' id='end' value='' name="output4" /></output>
+        </li>
+        <button  data-rel="dialog" type="submit" data-role="submit" id="submit" value="Save Log Entry" class="ui-btn-b" >Save Log Entry</button>
+        </ul>
+     </form>
+  </div><!-- /content -->
+
+  <div data-role="footer" data-position="fixed" style="text-align: center"> <!-- footer for the Type of Vehicle division -->
+    <a href="#vehicle" id="nxt" onclick="next()" data-role="button" data-icon="arrow-r" data-inline="true">Next</a>
+    <a href="#vehicle" id="" onclick="prev()" data-role="button" data-icon="arrow-l" data-inline="true">Previous</a>
+    <a href="#home_page" data-role="button" data-icon="home" data-inline="true" >Home</a>
+  </div><!-- /footer -->
+  </div> <!--/vehicle -->
+
+  <!-- Show log page -->
+  <div data-role="page" id="Show-form">
+    <form id="logs-form">
+        <div data-role="header">
+          <a href="#vehicle" data-role="button" onclick= "clearing()">Back</a> <!--Going back to the Type of Vehicle page from the Show Logs page -->
+		        <h1><span id="CarName"> </span></h1>
+  		      <a onclick="myFunction()" data-role="button" data-icon="home">Send</a> <!-- send button helps to delete all the data in the Slow Logs page-->
+        </div><!-- /header-->
+        <div data-role="main" class="ui-content">
+        <div class="ui-field-contain">
+              <label><b><h2>Current Log Entries:</h2></b></label>
+          </div>
+          <div>
+              <label>Driver, rego , latitude, longitude, start, first, second, end, etc.</label>
+          </div>
+          <div class="logs-to-append"> <!--all the contents that have been stored in the local storage is stored in this division -->
+          </div> <!--/logs-to-append-->
+        </div><!--/ui-field-contain -->
+
+
+        <div data-role="footer" data-position="fixed" style="text-align: center">
+          <a href="#home_page" data-role="button" data-icon="delete" data-inline="true">Home</a>
+        </div><!--/footer -->
+    </form>
+  </div><!--/Show-form -->
+</body>
+</html>
